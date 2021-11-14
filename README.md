@@ -72,11 +72,24 @@ Please go through the **Requirements.txt file: https://gitlab.com/ankurpython/po
 
 ![visualize_map](/uploads/952caced461f121d39532ac6269bb00f/visualize_map.png)
 
-### Screen Record 
+## Screen Record 
 
+![Untitled__1___1_](/uploads/6436757e9b54f9b417a77e3f1ab0e275/Untitled__1___1_.mp4)
 
+## AWS deployment  
 
+### Admin : **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/admin_login/**
 
+      >> 1. username == ankur
+      >> 2. password == 1234
+
+### List of MAP Data: **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/map/**
+
+### Plant data : **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/plant_states/**
+
+### Filter by state: **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/plant_states/?plant_state=AK&plant_code=**
+
+### Single Plant details: **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/plant_states/43/**
 
 
 
