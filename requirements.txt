@@ -1,0 +1,15 @@
+Django
+django-filter
+django-rest-auth
+djangorestframework
+pytz
+requests
+dateparser
+gunicorn
+daphne
+supervisor
+djangorestframework-simplejwt
+PyJWT==2.1.0
+pandas
+matplotlib
+openpyxl
