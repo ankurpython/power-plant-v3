@@ -29,7 +29,7 @@ Please go through the **Requirements.txt file: https://gitlab.com/ankurpython/po
 > 7. Request for display the top n-plants : **http://127.0.0.1:8000/plant_states**
 > 8. Request for filter by state : **http://127.0.0.1:8000/plant_states/?plant_state=AL**
 > 9. Request for single plant details : **http://127.0.0.1:8000/plant_states/699**
-> 10. For pagination : **http://127.0.0.1:8000/plant_states/?limit=20&offset=1000**
+
 
 
 ## Steps to build the Docker(if it's not build)
