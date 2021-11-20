@@ -6,8 +6,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()
 router.register('plant_states', PlantStates, basename='plant_states')
-router.register('map', Map, basename='map')
-router.register('lib_map', LibMap, basename='lib_map')
+
+
 
 urlpatterns = [
     path('', include(router.urls)),
