@@ -83,13 +83,13 @@ Please go through the **Requirements.txt file: https://gitlab.com/ankurpython/po
       >> 1. username == ankur
       >> 2. password == 1234
 
-### List of MAP Data: **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/map/**
+### List of MAP Data: **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/plant_states/**
 
-### Plant data : **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/plant_states/**
+### Top N-Plant data : **use the map data link with /states/?limit=20&offset=0&ordering=-annual_net_gen&plant_state=AK**
 
-### Filter by state: **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/plant_states/?plant_state=AK&plant_code=**
+### Filter by state: ** /?plant_state=AK**
 
-### Single Plant details: **http://ec2-13-126-248-147.ap-south-1.compute.amazonaws.com/plant_states/43/**
+### Single Plant details: **/656/**
 
 
 
