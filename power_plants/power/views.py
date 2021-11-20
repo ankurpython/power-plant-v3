@@ -1,65 +1,32 @@
-import pandas as pd
+from django.db.models import Avg, Sum
 from django_filters.rest_framework import DjangoFilterBackend
-from matplotlib import pyplot as plt
-from rest_framework.pagination import PageNumberPagination
+from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 from .serializers import *
+from rest_framework.response import Response
+from rest_framework.status import *
 
 
 class PlantStates(ModelViewSet):
     serializer_class = GeneratorSerializer
     queryset = PowerGenerator.objects.all()
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['plant_state', 'plant_code']
+    ordering_fields = ['annual_net_gen']
 
+    def retrieve(self, request, pk=None):
+        try:
+            obj = PowerGenerator.objects.get(id=pk)
+            count = PowerGenerator.objects.filter(plant_state=obj.plant_state).aggregate(Sum('annual_net_gen'))
+            # count = PowerGenerator.objects.aggregate(Sum('annual_net_gen'))
+            try:
+                pr = obj.annual_net_gen / count['annual_net_gen__sum'] * 100
+            except:
+                pr = 0
 
-class LargeResultsSetPagination(PageNumberPagination):
-    page_size = 1000
-    page_size_query_param = 'page_size'
-    max_page_size = 10000
-
-
-class Map(ModelViewSet):
-    serializer_class = GeneratorSerializer
-    queryset = PowerGenerator.objects.filter(plant_state='AK')
-    pagination_class = LargeResultsSetPagination
-
-    
-class LibMap(ModelViewSet):
-    def list(self, request, *args, **kwargs):
-        queryset = PowerGenerator.objects.filter(plant_state='AK').values('plant_name', 'annual_net_gen')
-        df = pd.DataFrame(queryset)
-        x = df['plant_name'].to_numpy()
-        y = df['annual_net_gen'].to_numpy()
-
-        plt.bar(x, y)
-        response = HttpResponse(content_type='image/png')
-        plt.show()
-        return response
-
-
-
-'''Data for plotting
-        t = np.arange(0.0, 2.0, 0.01)
-        s = 1 + np.sin(2 * np.pi * t)
-
-        fig, ax = plt.subplots()
-        ax.plot(t, s)
-
-        ax.set(xlabel='time (s)', ylabel='voltage (mV)',
-               title='About as simple as it gets, folks')
-        ax.grid()
-
-        response = HttpResponse(content_type='image/png')
-        canvas = FigureCanvasAgg(fig)
-        canvas.print_png(response)'''
-
-'''.values('plant_name', 'annual_net_gen')
-        df = pd.DataFrame(queryset)
-        x = df['plant_name'].to_numpy()
-        y = df['annual_net_gen'].to_numpy()
-
-        plt.bar(x, y)
-        response = HttpResponse(content_type='image/png')
-        plt.show()
-        return response'''
+            serializer = GeneratorSerializer(obj)
+            data = serializer.data
+            data['per'] = pr
+            return Response(data, status=HTTP_200_OK)
+        except:
+            return Response({'msg': 'Invalid ID'}, status=HTTP_400_BAD_REQUEST)
