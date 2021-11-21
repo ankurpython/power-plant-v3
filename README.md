@@ -87,7 +87,7 @@ Please go through the **Requirements.txt file: https://gitlab.com/ankurpython/po
 
 ### Top N-Plant data : **use the map data link with /states/?limit=20&offset=0&ordering=-annual_net_gen&plant_state=AK**
 
-### Filter by state: ** /?plant_state=AK**
+### Filter by state: **/?plant_state=AK**
 
 ### Single Plant details: **/656/**
 
